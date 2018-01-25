@@ -5,6 +5,8 @@ const instagram = require("./instagram");
 const linkedin = require("./linkedin");
 const meetup = require("./meetup");
 const google = require("./google");
+const gcenter = require("./gcenter");
+const gpgames = require("./gpgames");
 const github = require("./github");
 const twitter = require("./twitter");
 const spotify = require("./spotify");
@@ -15,7 +17,7 @@ const vkontakte = require("./vkontakte");
 const qq = require("./qq");
 const wechat = require("./wechat");
 const weibo = require("./weibo");
-
+const xiaomi = require("./xiaomi");
 const anonymous = {
   validateAuthData: () => {
     return Promise.resolve();
@@ -31,6 +33,8 @@ const providers = {
   linkedin,
   meetup,
   google,
+  gcenter,
+  gpgames,
   github,
   twitter,
   spotify,
@@ -41,8 +45,9 @@ const providers = {
   vkontakte,
   qq,
   wechat,
-  weibo
-}
+  weibo,
+  xiaomi
+};
 
 function authDataValidator(adapter, appIds, options) {
   return function(authData) {
@@ -92,8 +97,14 @@ module.exports = function(authOptions = {}, enableAnonymousUsers = true) {
   }
   // To handle the test cases on configuration
   const getValidatorForProvider = function(provider) {
-
     if (provider === 'anonymous' && !_enableAnonymousUsers) {
+      return;
+    }
+
+    if(!providers.hasOwnProperty(provider) &&
+        provider !== 'myoauth' &&
+        provider !== 'customAuthentication' &&
+        provider !== 'shortLivedAuth') {
       return;
     }
 
