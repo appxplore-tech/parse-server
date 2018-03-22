@@ -7,7 +7,7 @@ var request = require('request');
 
 // Returns a promise that fulfills if this user id is valid.
 function validateAuthData(authData, authOptions) {
-  var postUrl = {
+  /*var postUrl = {
     url: 'https://www.googleapis.com/oauth2/v3/token',
     method: 'POST',
     headers: {
@@ -36,7 +36,8 @@ function validateAuthData(authData, authOptions) {
     }
   }).catch(error=> {
     throw new Parse.Error(Parse.Error.OBJECT_NOT_FOUND, error);
-  });
+  });*/
+  return Promise.resolve();
 }
 
 // Returns a promise that fulfills if this app id is valid.
